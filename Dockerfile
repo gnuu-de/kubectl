@@ -1,4 +1,10 @@
-FROM gcr.io/cloud-builders/kubectl
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confnew wireguard-dkms wireguard-tools
+RUN snap install kubectl --classic
 
 LABEL version="1.0.0"
 LABEL name="kubectl"
