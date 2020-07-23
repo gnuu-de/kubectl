@@ -2,12 +2,11 @@
 
 set -e
 
-cat /etc/os-release
+mkdir -p /etc/wireguard
 
-wg genkey | tee privatekey | wg pubkey > publickey
-wg genpsk > preshared
-
-wg show
+echo "$WIREGUARD_CONF" | base64 --decode > /etc/wireguard/wg0.conf
+wg-quick up wg0
+ping -c 5 10.4.0.1
 
 # Extract the base64 encoded config data and write this to the KUBECONFIG
 echo "$KUBE_CONFIG_DATA" | base64 --decode > /tmp/config
