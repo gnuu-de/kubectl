@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/base-debian10:latest
+FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND=noninteractive
 
