@@ -1,10 +1,10 @@
-FROM ubuntu:20.04
+FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confnew wireguard-dkms wireguard-tools
-RUN snap install kubectl --classic
+RUN apt-get install -y -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confnew wireguard-dkms wireguard-tools curl
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin/
 
 LABEL version="1.0.0"
 LABEL name="kubectl"
